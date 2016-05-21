@@ -1,9 +1,13 @@
 package techkids.mad3.theweather;
 
 import android.app.IntentService;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.Context;
 import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -52,6 +56,29 @@ public class WeatherService extends IntentService {
                 Log.d("Testtttt", weatherDescription);
 
 
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(this)
+                                .setSmallIcon(R.drawable.notification_icon)
+                                .setContentTitle("My notification")
+                                .setContentText("Hello World!");
+
+                Intent resultIntent = new Intent(WeatherService.this, MainActivity.class);
+
+
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+                stackBuilder.addParentStack(MainActivity.class);
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent =
+                        stackBuilder.getPendingIntent(
+                                0,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                mBuilder.setContentIntent(resultPendingIntent);
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(mId, mBuilder.build());
+
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
@@ -59,7 +86,7 @@ public class WeatherService extends IntentService {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (Exception e) {
-
+                System.out.println(e.toString());
             }
 
     }
