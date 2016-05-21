@@ -12,3 +12,4 @@
 + [Custom Notification in Android](https://developer.android.com/guide/topics/ui/notifiers/notifications.html)
 + [Thư viện GSON của Google](https://github.com/google/gson/blob/master/UserGuide.md)
 + [Alarm Manager with Notification in Android](https://gist.github.com/BrandonSmith/6679223)
++ [Scheduled notification in Android using Alarm Manager](https://nnish.com/2014/12/16/scheduled-notifications-in-android-using-alarm-manager/)
