@@ -11,3 +11,4 @@
 + [Website: Open Weather Map để lấy dữ liệu thời tiết](http://openweathermap.org/examples)
 + [Custom Notification in Android](https://developer.android.com/guide/topics/ui/notifiers/notifications.html)
 + [Thư viện GSON của Google](https://github.com/google/gson/blob/master/UserGuide.md)
++ [Alarm Manager with Notification in Android](https://gist.github.com/BrandonSmith/6679223)
