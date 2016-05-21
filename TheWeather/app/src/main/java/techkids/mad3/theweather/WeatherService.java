@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+import android.widget.RemoteViews;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,27 +57,46 @@ public class WeatherService extends IntentService {
                 Log.d("Testtttt", weatherDescription);
 
 
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(this)
-                                .setSmallIcon(R.drawable.notification_icon)
-                                .setContentTitle("My notification")
-                                .setContentText("Hello World!");
+                // Using RemoteViews to bind custom layouts into Notification
+                RemoteViews remoteViews = new RemoteViews(getPackageName(),
+                        R.layout.customnotification);
 
-                Intent resultIntent = new Intent(WeatherService.this, MainActivity.class);
+                // Set Notification Title
+                String strtitle = weatherDescription;
+                // Set Notification Text
+                //String strtext = getString(R.string.customnotificationtext);
 
+                Intent i = new Intent(this, MainActivity.class);
+                // Send data to NotificationView Class
+                i.putExtra("title", strtitle);
+                //i.putExtra("text", strtext);
+                // Open NotificationView.java Activity
+                PendingIntent pIntent = PendingIntent.getActivity(this, 0, i,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
 
-                TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-                stackBuilder.addParentStack(MainActivity.class);
-                stackBuilder.addNextIntent(resultIntent);
-                PendingIntent resultPendingIntent =
-                        stackBuilder.getPendingIntent(
-                                0,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        );
-                mBuilder.setContentIntent(resultPendingIntent);
-                NotificationManager mNotificationManager =
-                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(mId, mBuilder.build());
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                        // Set Icon
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        // Set Ticker Message
+                        //.setTicker(getString(R.string.customnotificationticker))
+                        // Dismiss Notification
+                        .setAutoCancel(true)
+                        // Set PendingIntent into Notification
+                        .setContentIntent(pIntent)
+                        // Set RemoteViews into Notification
+                        .setContent(remoteViews);
+
+                // Locate and set the Image into customnotificationtext.xml ImageViews
+                remoteViews.setImageViewResource(R.id.imgTemp,R.mipmap.ic_launcher);
+
+                // Locate and set the Text into customnotificationtext.xml TextViews
+                //remoteViews.setTextViewText(R.id.title,getString(R.string.customnotificationtitle));
+                remoteViews.setTextViewText(R.id.tvMainTemp, strtitle);
+
+                // Create Notification Manager
+                NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                // Build Notification with Notification Manager
+                notificationmanager.notify(0, builder.build());
 
 
             } catch (MalformedURLException e) {
