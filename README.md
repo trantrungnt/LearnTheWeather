@@ -14,3 +14,4 @@
 + [Alarm Manager with Notification in Android](https://gist.github.com/BrandonSmith/6679223)
 + [Scheduled notification in Android using Alarm Manager](https://nnish.com/2014/12/16/scheduled-notifications-in-android-using-alarm-manager/)
 + [Custom Notification in Android - Example](http://www.androidbegin.com/tutorial/android-custom-notification-tutorial/)
++ [JSON Pretty printer](http://jsonprettyprint.com/json-pretty-printer.php)
