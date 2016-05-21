@@ -5,6 +5,8 @@
 + Hiển thị nhiệt độ 
 
 ![The Weather uses Service to update The Weather's data](http://i477.photobucket.com/albums/rr132/trungepu/TheWeather-Service_zpsn9kg6kq1.jpg)
+![JSON Data - the Weather](http://i477.photobucket.com/albums/rr132/trungepu/JSON-Data-Weather_zpsstorj1zr.png)
+
 
 ##Nguồn tham khảo
 + [Build Weather app json http in Android](http://www.survivingwithandroid.com/2013/05/build-weather-app-json-http-android.html)
