@@ -81,7 +81,7 @@ public class WeatherService extends IntentService {
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                         // Set Icon
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(R.drawable.cloudy)
                         // Set Ticker Message
                         .setTicker(strweatherDescription)
                         // Dismiss Notification
@@ -92,13 +92,13 @@ public class WeatherService extends IntentService {
                         .setContent(remoteViews);
 
                 // Locate and set the Image into customnotificationtext.xml ImageViews
-                remoteViews.setImageViewResource(R.id.imgTemp, R.drawable.cloud_sun);
+                remoteViews.setImageViewResource(R.id.imgTemp, R.drawable.cloudy);
 
                 // Locate and set the Text into customnotificationtext.xml TextViews
                 //remoteViews.setTextViewText(R.id.title,getString(R.string.customnotificationtitle));
                 remoteViews.setTextViewText(R.id.tvMainTemp, strweatherDescription);
-                remoteViews.setTextViewText(R.id.tvMinTemp, strDisplayTempMin.substring(0, 5)  + " " + (char) 0x00B0 + "C");
-                remoteViews.setTextViewText(R.id.tvMaxTemp, strDisplayTempMax.substring(0, 5) + " " + (char) 0x00B0 + "C");
+                remoteViews.setTextViewText(R.id.tvMinTemp, "Min: " + strDisplayTempMin.substring(0, 5)  + " " + (char) 0x00B0 + "C");
+                remoteViews.setTextViewText(R.id.tvMaxTemp, "Max: " + strDisplayTempMax.substring(0, 5) + " " + (char) 0x00B0 + "C");
 
                 // Create Notification Manager
                 NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
