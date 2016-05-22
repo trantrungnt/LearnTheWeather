@@ -62,6 +62,8 @@ public class WeatherService extends IntentService {
                 String strtempMax = main.getString("temp_max");
                 String strDisplayTempMin = String.valueOf(Float.parseFloat(strtempMin) - 273.15);
                 String strDisplayTempMax = String.valueOf(Float.parseFloat(strtempMax) - 273.15);
+                String strTemp = main.getString("temp");
+                String strDisplayMainTemp = String.valueOf(Float.parseFloat(strTemp) - 273.15);
 
                 Log.d("min temp: ", strDisplayTempMin);
 
@@ -83,7 +85,7 @@ public class WeatherService extends IntentService {
                         // Set Icon
                         .setSmallIcon(R.drawable.cloudy)
                         // Set Ticker Message
-                        .setTicker(strweatherDescription)
+                        .setTicker(strweatherDescription + " in Ha Noi, Viet Nam")
                         // Dismiss Notification
                         .setAutoCancel(true)
                         // Set PendingIntent into Notification
@@ -96,9 +98,10 @@ public class WeatherService extends IntentService {
 
                 // Locate and set the Text into customnotificationtext.xml TextViews
                 //remoteViews.setTextViewText(R.id.title,getString(R.string.customnotificationtitle));
-                remoteViews.setTextViewText(R.id.tvMainTemp, strweatherDescription);
+                remoteViews.setTextViewText(R.id.tvDescriptionTemp, strweatherDescription);
                 remoteViews.setTextViewText(R.id.tvMinTemp, "Min: " + strDisplayTempMin.substring(0, 5)  + " " + (char) 0x00B0 + "C");
                 remoteViews.setTextViewText(R.id.tvMaxTemp, "Max: " + strDisplayTempMax.substring(0, 5) + " " + (char) 0x00B0 + "C");
+                remoteViews.setTextViewText(R.id.tvMainTemp, strDisplayMainTemp.substring(0, 5) + (char) 0x00B0 + "C");
 
                 // Create Notification Manager
                 NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
