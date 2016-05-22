@@ -97,8 +97,8 @@ public class WeatherService extends IntentService {
                 // Locate and set the Text into customnotificationtext.xml TextViews
                 //remoteViews.setTextViewText(R.id.title,getString(R.string.customnotificationtitle));
                 remoteViews.setTextViewText(R.id.tvMainTemp, strweatherDescription);
-                remoteViews.setTextViewText(R.id.tvMinTemp, strDisplayTempMin + " " + (char) 0x00B0 + "C");
-                remoteViews.setTextViewText(R.id.tvMaxTemp, strDisplayTempMax + " " + (char) 0x00B0 + "C");
+                remoteViews.setTextViewText(R.id.tvMinTemp, strDisplayTempMin.substring(0, 5)  + " " + (char) 0x00B0 + "C");
+                remoteViews.setTextViewText(R.id.tvMaxTemp, strDisplayTempMax.substring(0, 5) + " " + (char) 0x00B0 + "C");
 
                 // Create Notification Manager
                 NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
