@@ -57,9 +57,9 @@ public class WeatherService extends IntentService {
                 Log.d("Testtttt", weatherDescription);
 
                 JSONObject main = resultObject.getJSONObject("main");
-                String tempMin = main.getString("temp_min");
+                String strtempMin = main.getString("temp_min");
 
-                Log.d("min temp: ", tempMin);
+                Log.d("min temp: ", strtempMin);
 
 
                 // Using RemoteViews to bind custom layouts into Notification
@@ -68,13 +68,9 @@ public class WeatherService extends IntentService {
 
                 // Set Notification Title
                 String strtitle = weatherDescription;
-                // Set Notification Text
-                //String strtext = getString(R.string.customnotificationtext);
 
                 Intent i = new Intent(this, MainActivity.class);
 
-                //i.putExtra("title", strtitle);
-                //i.putExtra("text", strtext);
                 // Open NotificationView.java Activity
                 PendingIntent pIntent = PendingIntent.getActivity(this, 0, i,
                         PendingIntent.FLAG_UPDATE_CURRENT);
@@ -97,6 +93,7 @@ public class WeatherService extends IntentService {
                 // Locate and set the Text into customnotificationtext.xml TextViews
                 //remoteViews.setTextViewText(R.id.title,getString(R.string.customnotificationtitle));
                 remoteViews.setTextViewText(R.id.tvMainTemp, strtitle);
+                remoteViews.setTextViewText(R.id.tvMinTemp, strtempMin);
 
                 // Create Notification Manager
                 NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

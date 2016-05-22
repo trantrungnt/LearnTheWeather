@@ -17,17 +17,14 @@
         <TextView
             android:id="@+id/tvMainTemp"
             android:layout_marginTop="10dp"
-            android:text="Main Temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tvMinTemp"
-            android:text="Min Temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tvMaxTemp"
-            android:text="Min Temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
