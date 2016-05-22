@@ -18,4 +18,5 @@
 + [Custom Notification in Android - Example](http://www.androidbegin.com/tutorial/android-custom-notification-tutorial/)
 + [JSON Pretty printer](http://jsonprettyprint.com/json-pretty-printer.php)
 + [Free material design icons](https://superdevresources.com/free-material-design-icons/)
++ [Link download Icons Weather Cloudy](https://materialdesignicons.com/icon/weather-cloudy)
 
