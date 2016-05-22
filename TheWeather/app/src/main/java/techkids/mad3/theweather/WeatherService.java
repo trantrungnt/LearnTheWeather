@@ -58,6 +58,7 @@ public class WeatherService extends IntentService {
 
                 JSONObject main = resultObject.getJSONObject("main");
                 String strtempMin = main.getString("temp_min");
+                String strtempMax = main.getString("temp_max");
 
                 Log.d("min temp: ", strtempMin);
 
@@ -67,7 +68,7 @@ public class WeatherService extends IntentService {
                         R.layout.customnotification);
 
                 // Set Notification Title
-                String strtitle = weatherDescription;
+                String strweatherDescription = weatherDescription;
 
                 Intent i = new Intent(this, MainActivity.class);
 
@@ -79,7 +80,7 @@ public class WeatherService extends IntentService {
                         // Set Icon
                         .setSmallIcon(R.mipmap.ic_launcher)
                         // Set Ticker Message
-                        //.setTicker(getString(R.string.customnotificationticker))
+                        .setTicker(strweatherDescription)
                         // Dismiss Notification
                         .setAutoCancel(true)
                         // Set PendingIntent into Notification
@@ -92,8 +93,9 @@ public class WeatherService extends IntentService {
 
                 // Locate and set the Text into customnotificationtext.xml TextViews
                 //remoteViews.setTextViewText(R.id.title,getString(R.string.customnotificationtitle));
-                remoteViews.setTextViewText(R.id.tvMainTemp, strtitle);
+                remoteViews.setTextViewText(R.id.tvMainTemp, strweatherDescription);
                 remoteViews.setTextViewText(R.id.tvMinTemp, strtempMin);
+                remoteViews.setTextViewText(R.id.tvMaxTemp, strtempMax);
 
                 // Create Notification Manager
                 NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
