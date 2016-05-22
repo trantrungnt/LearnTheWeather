@@ -30,6 +30,7 @@ import java.nio.channels.Channels;
  * helper methods.
  */
 public class WeatherService extends IntentService {
+
     public WeatherService() {
         super("WeatherService");
     }
@@ -59,8 +60,10 @@ public class WeatherService extends IntentService {
                 JSONObject main = resultObject.getJSONObject("main");
                 String strtempMin = main.getString("temp_min");
                 String strtempMax = main.getString("temp_max");
+                String strDisplayTempMin = String.valueOf(Float.parseFloat(strtempMin) - 273.15);
+                String strDisplayTempMax = String.valueOf(Float.parseFloat(strtempMax) - 273.15);
 
-                Log.d("min temp: ", strtempMin);
+                Log.d("min temp: ", strDisplayTempMin);
 
 
                 // Using RemoteViews to bind custom layouts into Notification
@@ -94,8 +97,8 @@ public class WeatherService extends IntentService {
                 // Locate and set the Text into customnotificationtext.xml TextViews
                 //remoteViews.setTextViewText(R.id.title,getString(R.string.customnotificationtitle));
                 remoteViews.setTextViewText(R.id.tvMainTemp, strweatherDescription);
-                remoteViews.setTextViewText(R.id.tvMinTemp, strtempMin + " " + (char) 0x00B0 + "C");
-                remoteViews.setTextViewText(R.id.tvMaxTemp, strtempMax + " " + (char) 0x00B0 + "C");
+                remoteViews.setTextViewText(R.id.tvMinTemp, strDisplayTempMin + " " + (char) 0x00B0 + "C");
+                remoteViews.setTextViewText(R.id.tvMaxTemp, strDisplayTempMax + " " + (char) 0x00B0 + "C");
 
                 // Create Notification Manager
                 NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
