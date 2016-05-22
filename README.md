@@ -17,3 +17,5 @@
 + [Scheduled notification in Android using Alarm Manager](https://nnish.com/2014/12/16/scheduled-notifications-in-android-using-alarm-manager/)
 + [Custom Notification in Android - Example](http://www.androidbegin.com/tutorial/android-custom-notification-tutorial/)
 + [JSON Pretty printer](http://jsonprettyprint.com/json-pretty-printer.php)
++ [Free material design icons](https://superdevresources.com/free-material-design-icons/)
+
