@@ -87,7 +87,7 @@ public class WeatherService extends IntentService {
                         .setContent(remoteViews);
 
                 // Locate and set the Image into customnotificationtext.xml ImageViews
-                remoteViews.setImageViewResource(R.id.imgTemp,R.mipmap.ic_launcher);
+                remoteViews.setImageViewResource(R.id.imgTemp, R.drawable.cloud_sun);
 
                 // Locate and set the Text into customnotificationtext.xml TextViews
                 //remoteViews.setTextViewText(R.id.title,getString(R.string.customnotificationtitle));
