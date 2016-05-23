@@ -3,6 +3,8 @@
     package="techkids.mad3.theweather">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +22,6 @@
         <service
             android:name=".WeatherService"
             android:exported="false"></service>
-
     </application>
 
 </manifest>

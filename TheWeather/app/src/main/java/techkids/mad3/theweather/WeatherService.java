@@ -1,15 +1,13 @@
 package techkids.mad3.theweather;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.Context;
-import android.net.Uri;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
+import android.os.Bundle;
 import android.util.Log;
-import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,10 +15,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.channels.Channels;
+import java.util.GregorianCalendar;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -30,6 +27,8 @@ import java.nio.channels.Channels;
  * helper methods.
  */
 public class WeatherService extends IntentService {
+    private Bundle bundleAlarm;
+    private Intent intentAlarm;
 
     public WeatherService() {
         super("WeatherService");
@@ -68,45 +67,32 @@ public class WeatherService extends IntentService {
                 Log.d("min temp: ", strDisplayTempMin);
 
 
-                // Using RemoteViews to bind custom layouts into Notification
-                RemoteViews remoteViews = new RemoteViews(getPackageName(),
-                        R.layout.customnotification);
-
                 // Set Notification Title
                 String strweatherDescription = weatherDescription;
 
-                Intent i = new Intent(this, MainActivity.class);
+                // time at which alarm will be scheduled here alarm is scheduled at 1 day from current time,
+                // we fetch  the current time in milliseconds and added 1 day time
+                // i.e. 24*60*60*1000= 86,400,000   milliseconds in a day
+                Long time = new GregorianCalendar().getTimeInMillis()+24*60*60*1000;
 
-                // Open NotificationView.java Activity
-                PendingIntent pIntent = PendingIntent.getActivity(this, 0, i,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                intentAlarm = new Intent(WeatherService.this, MainActivity.class);
+                bundleAlarm = new Bundle();
+                bundleAlarm.putString("WeatherDescription", strweatherDescription);
+                bundleAlarm.putString("TempMin", strDisplayTempMin);
+                bundleAlarm.putString("TempMax", strDisplayTempMax);
+                bundleAlarm.putString("TempMain", strDisplayMainTemp);
 
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                        // Set Icon
-                        .setSmallIcon(R.drawable.cloudy)
-                        // Set Ticker Message
-                        .setTicker(strweatherDescription + " in Ha Noi, Viet Nam")
-                        // Dismiss Notification
-                        .setAutoCancel(true)
-                        // Set PendingIntent into Notification
-                        .setContentIntent(pIntent)
-                        // Set RemoteViews into Notification
-                        .setContent(remoteViews);
+                intentAlarm.putExtra("DataTemp", bundleAlarm);
+                intentAlarm.setAction("FILTER_ALARM");
+                sendBroadcast(intentAlarm);
 
-                // Locate and set the Image into customnotificationtext.xml ImageViews
-                remoteViews.setImageViewResource(R.id.imgTemp, R.drawable.cloudy);
+                // create the object
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-                // Locate and set the Text into customnotificationtext.xml TextViews
-                //remoteViews.setTextViewText(R.id.title,getString(R.string.customnotificationtitle));
-                remoteViews.setTextViewText(R.id.tvDescriptionTemp, strweatherDescription);
-                remoteViews.setTextViewText(R.id.tvMinTemp, "Min: " + strDisplayTempMin.substring(0, 5)  + " " + (char) 0x00B0 + "C");
-                remoteViews.setTextViewText(R.id.tvMaxTemp, "Max: " + strDisplayTempMax.substring(0, 5) + " " + (char) 0x00B0 + "C");
-                remoteViews.setTextViewText(R.id.tvMainTemp, strDisplayMainTemp.substring(0, 5) + (char) 0x00B0 + "C");
+                //set the alarm for particular time
+                alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+                Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
 
-                // Create Notification Manager
-                NotificationManager notificationmanager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                // Build Notification with Notification Manager
-                notificationmanager.notify(0, builder.build());
 
 
             } catch (MalformedURLException e) {
