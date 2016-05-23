@@ -14,8 +14,8 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 public class MainActivity extends AppCompatActivity {
-    public static String NOTIFICATION_ID = "notification-id";
-    public static String NOTIFICATION = "notification";
+//    public static String NOTIFICATION_ID = "notification-id";
+//    public static String NOTIFICATION = "notification";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +30,18 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onResume();
 
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-                Notification notification = intent.getParcelableExtra(NOTIFICATION);
-                int id = intent.getIntExtra(NOTIFICATION_ID, 0);
-                notificationManager.notify(id, notification);
-                Log.d("Tao dayyyyyy", "okkkkkkkkkkkkkkkkkkkkk");
-            }
-        };
-
-        registerReceiver(broadcastReceiver, new IntentFilter("FILTER_ALARM_WEATHER"));
+//        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//                Notification notification = intent.getParcelableExtra(NOTIFICATION);
+//                int id = intent.getIntExtra(NOTIFICATION_ID, 0);
+//                notificationManager.notify(id, notification);
+//                Log.d("Tao dayyyyyy", "okkkkkkkkkkkkkkkkkkkkk");
+//            }
+//        };
+//
+//        registerReceiver(broadcastReceiver, new IntentFilter("FILTER_ALARM_WEATHER"));
     }
 }

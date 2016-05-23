@@ -75,14 +75,12 @@ public class WeatherService extends IntentService {
                 // we fetch  the current time in milliseconds and added 1 day time
                 // i.e. 24*60*60*1000= 86,400,000   milliseconds in a day
                 //Long time = new GregorianCalendar().getTimeInMillis()+24*60*60*1000;
-                long time = SystemClock.elapsedRealtime() + 3000;
+                long time = SystemClock.elapsedRealtime() + 10000;
 
-                intentAlarm = new Intent(WeatherService.this, MainActivity.class);
-                intentAlarm.putExtra(MainActivity.NOTIFICATION_ID, 1);
+                intentAlarm = new Intent(WeatherService.this, NotificationInformation.class);
+                intentAlarm.putExtra(NotificationInformation.NOTIFICATION_ID, 1);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT);
-                intentAlarm.putExtra(MainActivity.NOTIFICATION, getNotification(weatherDescription,strDisplayMainTemp, strDisplayTempMin, strDisplayTempMax, pendingIntent));
-                intentAlarm.setAction("FILTER_ALARM_WEATHER");
-                sendBroadcast(intentAlarm);
+                intentAlarm.putExtra(NotificationInformation.NOTIFICATION, getNotification(weatherDescription,strDisplayMainTemp, strDisplayTempMin, strDisplayTempMax, pendingIntent));
 
                 // create the object
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);

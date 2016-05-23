@@ -22,6 +22,7 @@
             android:name=".WeatherService"
             android:exported="false">
         </service>
+        <receiver android:name=".NotificationInformation" />
     </application>
 
 </manifest>
