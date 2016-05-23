@@ -87,7 +87,7 @@ public class WeatherService extends IntentService {
 
                 //set the alarm for particular time
                 alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, time, PendingIntent.getBroadcast(this,0,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-                Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "Alarm Scheduled for Tommrrow", Toast.LENGTH_LONG).show();
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -113,7 +113,7 @@ public class WeatherService extends IntentService {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 // Set Icon
-                .setSmallIcon(R.drawable.cloudy)
+                .setSmallIcon(R.drawable.moderate)
                 // Set Ticker Message
                 .setTicker(tempDescription + " in Ha Noi, Viet Nam")
                 // Dismiss Notification
@@ -124,7 +124,7 @@ public class WeatherService extends IntentService {
                 .setContent(remoteViews);
 
         // Locate and set the Image into customnotificationtext.xml ImageViews
-        remoteViews.setImageViewResource(R.id.imgTemp, R.drawable.cloudy);
+        remoteViews.setImageViewResource(R.id.imgTemp, R.drawable.moderate);
 
         // Locate and set the Text into customnotificationtext.xml TextViews
         remoteViews.setTextViewText(R.id.tvDescriptionTemp, tempDescription);
@@ -134,5 +134,4 @@ public class WeatherService extends IntentService {
 
         return builder.build();
     }
-
 }
