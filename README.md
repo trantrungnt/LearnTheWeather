@@ -20,4 +20,5 @@
 + [Free material design icons](https://superdevresources.com/free-material-design-icons/)
 + [Link download Icons Weather Cloudy](https://materialdesignicons.com/icon/weather-cloudy)
 + [Android Alarm Manager Example](http://www.javatpoint.com/android-alarmmanager)
++ [Android Alarm Manager](http://www.learn-android-easily.com/2013/05/android-alarm-manager_31.html)
 
